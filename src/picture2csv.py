@@ -1,8 +1,7 @@
-# Write a function which will import a picture with the black line on the white background. Save black line points to the .csv file (as a path, so the closest one has to be saved one after another). The function should return a pandas DataFrame with the points. Line in the picture is a one pixel line.
-
 import cv2
 import pandas as pd
 import numpy as np
+import os
 
 def picture2csv(file_name:str) -> pd.DataFrame:
     img = cv2.imread(file_name, cv2.IMREAD_GRAYSCALE)
@@ -14,8 +13,8 @@ def picture2csv(file_name:str) -> pd.DataFrame:
     # Add third column with zeros
     black_line_points = np.insert(black_line_points, 2, 0, axis=1)
 
-    df = pd.DataFrame(black_line_points, columns=['x','y','z'])
-    df.to_csv('line.csv', index=False)
+    df = pd.DataFrame(black_line_points)
+    df.to_csv('line.csv', index=False, header=False)
 
     # Use imshow to show the line exported to csv
     cv2.imshow('path',binary_image)
@@ -30,10 +29,10 @@ def controller(df_points:pd.DataFrame) -> None:
     joints_angles = np.random.randint(10, 80, (df_points.shape[0], 2))
 
     df = pd.DataFrame(joints_angles, columns=['joint1','joint2'])
-
-    df.to_csv('joint_angles.csv', index=False)
+    df.to_csv('jointAngles.csv', index=False, header=False)
 
 if __name__ == "__main__":
-    file_name = 'signature.png'
+    path = os.path.dirname(__file__)
+    file_name = os.path.join(path, 'signature.png')
     df_points = picture2csv(file_name)
     controller(df_points)
