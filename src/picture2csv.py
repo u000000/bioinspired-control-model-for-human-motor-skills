@@ -26,7 +26,7 @@ def picture2csv(file_name:str) -> pd.DataFrame:
 
 def controller(df_points:pd.DataFrame) -> None:
     # Generate random joint angles
-    joints_angles = np.random.randint(0, 180, (df_points.shape[0], 2))
+    joints_angles = np.random.randint(10, 30, (df_points.shape[0], 2))
 
     df = pd.DataFrame(joints_angles, columns=['joint1','joint2'])
     df.to_csv('jointAngles.csv', index=False, header=False)
