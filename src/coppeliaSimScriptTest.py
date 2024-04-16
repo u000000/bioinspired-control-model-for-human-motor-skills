@@ -10,10 +10,10 @@ def sysCall_init():
 
 def sysCall_actuation():
     # put your actuation code here
-
+    T_last_inserted = 0
     theta1 = sim.getJointPosition(self.joint1)
     theta2 = sim.getJointPosition(self.joint2)
-    print('theta1 = ' + str(theta1) + ' theta2 = ' + str(theta2))
+    #print('theta1 = ' + str(theta1) + ' theta2 = ' + str(theta2))
 
     # moving accordingly to theta values
     with open('/home/u000000/2_Semester/bioinspired-control-model-for-human-motor-skills/src/jointAngles.csv', 'r') as file:
@@ -24,13 +24,17 @@ def sysCall_actuation():
             theta2_rad = math.radians(theta2_deg)
             sim.setJointTargetPosition(self.joint1, theta1_rad)
             sim.setJointTargetPosition(self.joint2, theta2_rad)
-
-            #wait till target position is reached
-            while True:
-                if sim.getJointPosition(self.joint1) == theta1_rad and sim.getJointPosition(self.joint2) == theta2_rad:
-                    break
-                sim.switchThread()
-
+            
+            joint1TargetPosition = sim.getJointTargetPosition(self.joint1)
+            joint2TargetPosition = sim.getJointTargetPosition(self.joint2)
+            print('joint1 = ' + str(joint1TargetPosition))
+            print('joint2 = ' + str(joint2TargetPosition))
+            
+            # wait till target position is reached
+            #if sim.getJointPosition(self.joint1) == theta1_rad and sim.getJointPosition(self.joint2) == theta2_rad:
+            #    sim.wait(10.0, False)
+            
+                
     pass
 
 def sysCall_sensing():
