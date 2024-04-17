@@ -82,4 +82,4 @@ def drawOriginalSignature():
     with open('/home/u000000/2_Semester/bioinspired-control-model-for-human-motor-skills/src/line.csv', 'r') as file:
         for line in file:
             point = line.split(',')
-            sim.addDrawingObjectItem(drawingObject, [0,int(point[0])/300,int(point[1])/300])
+            sim.addDrawingObjectItem(drawingObject, [0,-int(point[0])/300,int(point[1])/300])
