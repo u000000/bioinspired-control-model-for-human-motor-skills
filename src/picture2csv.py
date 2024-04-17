@@ -10,14 +10,6 @@ def picture2csv(file_name:str) -> pd.DataFrame:
     # Look for black pixels
     black_line_points = np.argwhere(binary_image == 0)
 
-    # Add four columns with zeros
-    black_line_points = np.insert(black_line_points, 2, 0, axis=1)
-    black_line_points = np.insert(black_line_points, 3, 0, axis=1)
-    black_line_points = np.insert(black_line_points, 4, 0, axis=1)
-    black_line_points = np.insert(black_line_points, 5, 0, axis=1)
-    # Add column with ones
-    black_line_points = np.insert(black_line_points, 6, 1, axis=1)
-
     df = pd.DataFrame(black_line_points)
     df.to_csv('line.csv', index=False, header=False)
 
