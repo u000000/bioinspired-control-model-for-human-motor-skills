@@ -9,7 +9,7 @@ def sysCall_init():
     self.jointAngles = []
     self.i = 0
     self.waitUntil = 0
-    
+
     self.reachedTarget1 = 0
     self.reachedTarget2 = 0
     self.reachedTargetPrev1 = 0
